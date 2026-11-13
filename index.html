@@ -34,7 +34,7 @@
 
         .container {
             width: 100%;
-            max-width: 1150px;
+            max-width: 1250px;
             margin: 0 auto;
             padding: 0 5px;
             position: relative;
@@ -106,10 +106,11 @@
             gap: 15px;
         }
 
-        @media (min-width: 850px) {
+        @media (min-width: 950px) {
             .main-layout {
-                grid-template-columns: 380px 1fr;
+                grid-template-columns: 410px 1fr;
                 gap: 20px;
+                align-items: start;
             }
             body { padding: 20px; }
             header h1 { font-size: 24px; }
@@ -126,17 +127,6 @@
             overflow: hidden;
         }
 
-        .card-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid #34444e;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
         .card h2 {
             margin: 0;
             font-size: 15px;
@@ -145,41 +135,55 @@
             padding: 0;
         }
 
-        .controls-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            align-items: flex-end;
+        /* --- BOTTOM SECTION ROW --- */
+        .bottom-section-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 12px;
+            align-items: start;
         }
 
-        .toggles-row-top, .toggles-row-bottom {
-            display: flex;
-            align-items: center;
+        @media (min-width: 560px) {
+            .bottom-section-row { grid-template-columns: 1.25fr 1fr; }
+        }
+
+        .bottom-left, .bottom-right { min-width: 0; }
+        .bottom-left #resetButtonsContainer { margin-top: 0 !important; }
+
+        /* --- CONTROLS GRID LAYOUT --- */
+        .controls-grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 10px;
-        }
-
-        .tooltip-toggle-wrapper {
-            display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 11px;
-            color: #a0aec0;
-            width: 135px;
-            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 5px;
         }
 
-        .widget-box {
+        .control-box-item {
             background: #111820;
-            border: 1px solid #00bcd4;
-            border-radius: 4px;
-            padding: 3px 6px;
+            border: 1px solid #283845;
+            padding: 8px 12px;
+            border-radius: 6px;
             display: flex;
             flex-direction: column;
-            align-items: center;
             justify-content: center;
-            box-shadow: inset 0 0 8px rgba(0, 188, 212, 0.2);
-            width: 135px;
-            height: 38px;
+            height: 52px;
+        }
+
+        .control-toggle-item {
+            background: #111820;
+            border: 1px solid #283845;
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 52px;
+            font-size: 12px;
+            color: #a0aec0;
+            font-weight: 500;
         }
 
         .widget-title {
@@ -189,21 +193,20 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             line-height: 1;
-            margin-bottom: 2px;
+            margin-bottom: 3px;
         }
 
         .widget-display-row {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 4px;
+            justify-content: space-between;
             width: 100%;
         }
 
         .widget-display {
             font-family: 'Courier New', Courier, monospace;
             color: #00ff66;
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: bold;
             letter-spacing: 0.5px;
             text-shadow: 0 0 6px rgba(0, 255, 102, 0.4);
@@ -212,16 +215,16 @@
 
         .timer-controls {
             display: flex;
-            gap: 2px;
+            gap: 3px;
         }
 
         .timer-btn {
             background: #1f2937;
             border: 1px solid #4b5563;
             color: #e5e7eb;
-            font-size: 6.5px;
+            font-size: 7.5px;
             font-weight: bold;
-            padding: 1px 3px;
+            padding: 2px 4px;
             border-radius: 2px;
             cursor: pointer;
             transition: all 0.15s;
@@ -237,16 +240,12 @@
         .switch {
             position: relative;
             display: inline-block;
-            width: 30px;
-            height: 16px;
+            width: 32px;
+            height: 17px;
             flex-shrink: 0;
         }
 
-        .switch input { 
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .switch input { opacity: 0; width: 0; height: 0; }
 
         .slider {
             position: absolute;
@@ -254,15 +253,15 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background-color: #374151;
             transition: .3s;
-            border-radius: 16px;
+            border-radius: 17px;
             border: 1px solid #4b5563;
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 10px;
-            width: 10px;
+            height: 11px;
+            width: 11px;
             left: 2px;
             bottom: 2px;
             background-color: white;
@@ -276,16 +275,17 @@
         }
 
         input:checked + .slider:before {
-            transform: translateX(14px);
+            transform: translateX(15px);
         }
 
+        /* --- ACM FRONT PANEL --- */
         .acm-front-panel {
             background: var(--panel-bg);
             border: 3px solid #1a2228;
             border-radius: 6px;
-            padding: 12px;
+            padding: 10px;
             width: 100%;
-            max-width: 350px;
+            max-width: 100%;
             margin: 0 auto;
             box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 5px 15px rgba(0,0,0,0.5);
             position: relative;
@@ -296,8 +296,8 @@
             text-align: center;
             font-family: 'Arial Black', Arial, sans-serif;
             font-weight: 900;
-            padding: 2px 0 10px 0;
-            font-size: 17px;
+            padding: 2px 0 8px 0;
+            font-size: 16px;
             letter-spacing: 3px;
             text-transform: uppercase;
         }
@@ -306,7 +306,7 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             padding: 2px 3px;
             cursor: pointer;
             border-radius: 3px;
@@ -318,15 +318,15 @@
             background: linear-gradient(145deg, #4b5563, #374151);
             border: 1px solid #6b7280;
             border-top: 1px solid #9ca3af;
-            height: 22px;
+            height: 20px;
             border-radius: 3px;
             text-align: center;
             font-size: 9px;
             color: #f3f4f6;
             font-weight: bold;
             letter-spacing: 1px;
-            line-height: 20px;
-            width: 120px;
+            line-height: 18px;
+            width: 110px;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.6), 0 2px 4px rgba(0,0,0,0.3);
             text-shadow: 0 1px 2px rgba(0,0,0,0.8);
         }
@@ -335,9 +335,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             font-family: monospace;
-            font-size: 11px;
+            font-size: 10.5px;
             padding: 2px 3px;
             border-radius: 3px;
             position: relative;
@@ -369,23 +369,23 @@
         .num-tag {
             color: #00e5ff;
             font-weight: bold;
-            width: 22px;
+            width: 20px;
             text-align: right;
-            margin-right: 6px;
+            margin-right: 5px;
             flex-shrink: 0;
             z-index: 2;
         }
 
         .element-desc {
             flex-grow: 1;
-            margin-left: 6px;
+            margin-left: 5px;
             font-weight: bold;
             z-index: 2;
         }
 
         .push-btn {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
             border-radius: 50%;
             background: linear-gradient(135deg, #444 0%, #1a1a1a 100%);
             border: 2px solid #888;
@@ -400,9 +400,9 @@
         .push-btn.active-press { transform: scale(0.85); background: #00bcd4; border-color: #fff; }
 
         .square-push-btn {
-            width: 20px;
-            height: 20px;
-            border-radius: 4px;
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
             background: linear-gradient(135deg, #00bcd4 0%, #007788 100%);
             border: 2px solid #00e5ff;
             box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), 0 0 8px rgba(0, 229, 255, 0.6);
@@ -418,45 +418,45 @@
             background: rgba(0, 229, 255, 0.35);
             transition: width 0.05s linear;
             z-index: 1;
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         .timer-popup {
             position: absolute;
-            right: 10px; top: 50%;
+            right: 8px; top: 50%;
             transform: translateY(-50%);
             background: #00bcd4;
             color: #000;
-            font-size: 10px;
+            font-size: 9.5px;
             font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 2px 5px;
+            border-radius: 3px;
             box-shadow: 0 0 8px rgba(0,188,212,0.8);
             display: none;
             z-index: 10;
         }
 
         .led-elem {
-            width: 13px;
-            height: 13px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background-color: #dcdcdc;
-            border: 2px solid #555;
+            border: 1.5px solid #555;
             display: inline-block;
             transition: all 0.2s;
             z-index: 2;
         }
 
-        .led-elem.green.solid, .tooltip-led.green.solid { background-color: #00ff66; box-shadow: 0 0 8px #00ff66; border-color: #fff; }
-        .led-elem.green.flash, .tooltip-led.green.flash, .led-elem.green.flashing { background-color: #00ff66; box-shadow: 0 0 10px #00ff66; border-color: #fff; animation: blink 0.6s infinite; }
+        .led-elem.green.solid, .tooltip-led.green.solid { background-color: #00ff66; box-shadow: 0 0 7px #00ff66; border-color: #fff; }
+        .led-elem.green.flash, .tooltip-led.green.flash, .led-elem.green.flashing { background-color: #00ff66; box-shadow: 0 0 9px #00ff66; border-color: #fff; animation: blink 0.6s infinite; }
         
-        .led-elem.yellow.solid, .tooltip-led.yellow.solid { background-color: #ffb300; box-shadow: 0 0 10px #ffb300; border-color: #fff; }
-        .led-elem.yellow.flash, .tooltip-led.yellow.flash, .led-elem.yellow.flashing { background-color: #ffb300; box-shadow: 0 0 12px #ffb300; border-color: #fff; animation: blink 0.6s infinite; }
+        .led-elem.yellow.solid, .tooltip-led.yellow.solid { background-color: #ffb300; box-shadow: 0 0 9px #ffb300; border-color: #fff; }
+        .led-elem.yellow.flash, .tooltip-led.yellow.flash, .led-elem.yellow.flashing { background-color: #ffb300; box-shadow: 0 0 11px #ffb300; border-color: #fff; animation: blink 0.6s infinite; }
         
-        .led-elem.orange.solid, .tooltip-led.orange.solid { background-color: #ff7700; box-shadow: 0 0 10px #ff7700; border-color: #fff; }
+        .led-elem.orange.solid, .tooltip-led.orange.solid { background-color: #ff7700; box-shadow: 0 0 9px #ff7700; border-color: #fff; }
 
-        .led-elem.red.solid, .tooltip-led.red.solid { background-color: #ff3333; box-shadow: 0 0 8px #ff3333; border-color: #fff; }
-        .led-elem.red.flash, .tooltip-led.red.flash, .led-elem.red.flashing, .led-elem.flash { background-color: #ff3333; box-shadow: 0 0 12px #ff3333; border-color: #fff; animation: blink 0.6s infinite; }
+        .led-elem.red.solid, .tooltip-led.red.solid { background-color: #ff3333; box-shadow: 0 0 7px #ff3333; border-color: #fff; }
+        .led-elem.red.flash, .tooltip-led.red.flash, .led-elem.red.flashing, .led-elem.flash { background-color: #ff3333; box-shadow: 0 0 11px #ff3333; border-color: #fff; animation: blink 0.6s infinite; }
 
         @keyframes blink {
             0% { opacity: 1; }
@@ -464,12 +464,12 @@
             100% { opacity: 1; }
         }
 
-        .sim-socket-group { display: flex; flex-direction: column; gap: 2px; margin-left: 6px; z-index: 2; }
-        .sim-pair { display: flex; gap: 2px; }
+        .sim-socket-group { display: flex; flex-direction: column; gap: 1.5px; margin-left: 5px; z-index: 2; }
+        .sim-pair { display: flex; gap: 1.5px; }
 
         .sim-socket {
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             background: #111;
             border-radius: 50%;
             border: 1px solid #666;
@@ -480,13 +480,13 @@
         .fuse-row:hover { background: rgba(255, 51, 51, 0.15); }
 
         .fuse-slot {
-            width: 16px; height: 16px;
+            width: 14px; height: 14px;
             border-radius: 50%;
-            border: 2px solid #888;
+            border: 1.5px solid #888;
             background: #111;
             text-align: center;
-            font-size: 7px;
-            line-height: 12px;
+            font-size: 6.5px;
+            line-height: 10px;
             color: #ccc;
             transition: all 0.2s;
             z-index: 2;
@@ -500,7 +500,7 @@
             border-color: #ff3333;
             background: #ff3333;
             color: #fff;
-            box-shadow: 0 0 6px #ff3333;
+            box-shadow: 0 0 5px #ff3333;
         }
 
         .fuse-desc { transition: color 0.2s; }
@@ -510,9 +510,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
             font-family: monospace;
-            font-size: 11px;
+            font-size: 10.5px;
             padding: 2px 3px;
             border-radius: 3px;
             position: relative;
@@ -524,21 +524,21 @@
         .rj45-inline-group {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             flex-grow: 1;
-            margin-left: 6px;
+            margin-left: 5px;
         }
 
         .rj45-icon-box {
-            width: 22px;
-            height: 16px;
+            width: 20px;
+            height: 14px;
             background: #ffffff;
-            border: 2px solid #888888;
-            border-radius: 3px;
+            border: 1.5px solid #888888;
+            border-radius: 2px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 6px rgba(255,255,255,0.6);
+            box-shadow: 0 0 5px rgba(255,255,255,0.6);
             transition: all 0.25s ease;
             color: #000;
         }
@@ -546,7 +546,7 @@
         .rj45-icon-box.green-state {
             background: #00ff66;
             border-color: #ffffff;
-            box-shadow: 0 0 8px #00ff66;
+            box-shadow: 0 0 7px #00ff66;
             color: #000;
         }
 
@@ -558,7 +558,7 @@
         }
 
         .rj45-status-label {
-            font-size: 11px;
+            font-size: 10.5px;
             font-weight: bold;
             color: #ffffff;
             transition: color 0.2s;
@@ -569,7 +569,7 @@
 
         .panel-split { display: flex; justify-content: space-between; }
         .left-side { display: flex; flex-direction: column; flex-grow: 1; }
-        .right-side { display: flex; flex-direction: column; width: 130px; flex-shrink: 0; }
+        .right-side { display: flex; flex-direction: column; width: 120px; flex-shrink: 0; }
 
         .info-box {
             background: #12181b;
@@ -602,76 +602,76 @@
 
         .btn-reset {
             width: 100%;
-            margin-top: 12px;
-            padding: 10px;
+            margin-top: 10px;
+            padding: 9px;
             background: #c62828;
             color: #fff;
             border: none;
             border-radius: 5px;
             font-weight: bold;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             transition: background 0.2s;
         }
 
         .btn-reset:hover { background: #e53935; }
 
         .counter-section {
-            margin-top: 12px;
+            margin-top: 10px;
             background: var(--counter-bg);
             border: 2px solid #00e5ff;
             border-radius: 6px;
-            padding: 10px;
+            padding: 8px;
             box-shadow: inset 0 0 10px rgba(0,229,255,0.2), 0 4px 12px rgba(0,0,0,0.6);
             display: none;
         }
 
         .counter-section-title {
             color: #00e5ff;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
             text-align: center;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             border-bottom: 1px solid #1c2b36;
-            padding-bottom: 4px;
+            padding-bottom: 3px;
         }
 
         .counter-row-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 8px;
         }
 
         .counter-card {
             background: #111820;
             border: 1px solid #283845;
             border-radius: 4px;
-            padding: 6px 8px;
+            padding: 5px 6px;
             text-align: center;
         }
 
         .counter-card-header {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: bold;
             color: #a0aec0;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
         }
 
         .digit-display {
             font-family: 'Courier New', Courier, monospace;
             background: #000000;
             color: #00ff66;
-            font-size: 16px;
+            font-size: 14.5px;
             font-weight: bold;
-            padding: 4px 6px;
+            padding: 3px 5px;
             border-radius: 3px;
             border: 1px solid #00aa44;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             box-shadow: inset 0 0 8px rgba(0,255,102,0.3);
             display: inline-block;
-            min-width: 80px;
+            min-width: 70px;
         }
 
         .digit-display.occupied {
@@ -693,26 +693,56 @@
         }
 
         .counter-subtext {
-            font-size: 8px;
+            font-size: 7.5px;
             color: #718096;
-            margin-top: 3px;
+            margin-top: 2px;
             font-family: monospace;
         }
 
+        /* --- CONTINUOUS SHIMMER FOOTER (Start to End) --- */
         .app-footer {
             margin-top: 20px;
             text-align: center;
-            padding: 12px 15px;
+            padding: 14px 15px;
             background: linear-gradient(135deg, rgba(24, 32, 38, 0.7) 0%, rgba(15, 20, 23, 0.85) 100%);
             border-top: 1px solid rgba(0, 188, 212, 0.15);
             border-bottom: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 6px;
-            font-size: 11px;
-            color: rgba(224, 230, 237, 0.65);
+            font-size: 11.5px;
             font-family: 'Segoe UI', Tahoma, monospace;
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 4px 15px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.5px;
-            line-height: 1.5;
+            letter-spacing: 0.8px;
+            line-height: 1.6;
+        }
+
+        .shimmer-full-text {
+            display: inline-block;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.3);
+            background: linear-gradient(
+                90deg,
+                rgba(160, 174, 192, 0.35) 0%,
+                rgba(160, 174, 192, 0.35) 40%,
+                #ffffff 48%,
+                #00e5ff 50%,
+                #ffffff 52%,
+                rgba(160, 174, 192, 0.35) 60%,
+                rgba(160, 174, 192, 0.35) 100%
+            );
+            background-size: 250% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: continuousSweep 3.2s linear infinite;
+        }
+
+        @keyframes continuousSweep {
+            0% {
+                background-position: 100% 0;
+            }
+            100% {
+                background-position: -150% 0;
+            }
         }
     </style>
 </head>
@@ -731,6 +761,7 @@
 
     <div class="main-layout">
         
+        <!-- LEFT COLUMN: ACM Module only -->
         <div class="card">
             <h2>ACM Module</h2>
             <div class="acm-front-panel">
@@ -764,7 +795,7 @@
                         
                         <div class="panel-row non-clickable tooltip-trigger" data-key="COM" data-item="10"><span class="num-tag">10</span><div class="led-elem" id="LED_10"></div><span class="element-desc">COM</span></div>
                         
-                        <div class="panel-row clickable-btn-row tooltip-trigger" data-action="RST_RR1" id="row_rstrr1" style="margin-top:4px; position:relative;">
+                        <div class="panel-row clickable-btn-row tooltip-trigger" data-action="RST_RR1" id="row_rstrr1" style="margin-top:3px; position:relative;">
                             <div class="hold-progress" id="prog_rstrr1"></div>
                             <span class="num-tag">11</span><div class="push-btn" id="btn_rstrr1" title="Hold 4s to Reset RR1"></div><span class="element-desc">RST-RR1</span>
                             <div class="timer-popup" id="popup_rstrr1">4.0s</div>
@@ -775,11 +806,11 @@
                             <div class="timer-popup" id="popup_rstrr2">4.0s</div>
                         </div>
 
-                        <div class="rj45-row-aligned tooltip-trigger" data-tag="ETH" data-msg="Click to Cycle RJ45 Port State" onclick="_0x92a1b()" style="margin-top: 4px;">
+                        <div class="rj45-row-aligned tooltip-trigger" data-tag="ETH" data-msg="Click to Cycle RJ45 Port State" onclick="_0x92a1b()" style="margin-top: 3px;">
                             <span class="num-tag">19</span>
                             <div class="rj45-inline-group">
                                 <div class="rj45-icon-box" id="rj45Box">
-                                    <svg width="12" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                    <svg width="10" height="8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                                         <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
                                         <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
                                         <path d="M4 22h16v-10H4z"></path>
@@ -794,55 +825,55 @@
                     <div class="right-side">
                         <div class="panel-row clickable tooltip-trigger" data-key="CAL" data-item="13" id="row_cal" style="align-items: center; position: relative;">
                             <span class="num-tag">13</span>
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex-grow:1;">
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; flex-grow:1;">
                                 <div class="led-elem" id="LED_13"></div>
                                 <div class="push-btn" id="btn_cal" title="Hold 3s for Calibration"></div>
                             </div>
-                            <span class="element-desc" style="flex-grow:0; width: 38px;">CAL</span>
+                            <span class="element-desc" style="flex-grow:0; width: 34px;">CAL</span>
                             <div class="hold-progress" id="prog_cal"></div>
                             <div class="timer-popup" id="popup_cal">3.0s</div>
                         </div>
 
                         <div class="panel-row clickable tooltip-trigger" data-key="DIR1" data-item="14" id="row_dir1" style="align-items: center; position: relative;">
                             <span class="num-tag">14</span>
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex-grow:1;">
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; flex-grow:1;">
                                 <div class="led-elem" id="LED_14"></div>
                                 <div class="push-btn" id="btn_dir1" title="Hold 3s for DS1 Cal"></div>
                             </div>
-                            <span class="element-desc" style="flex-grow:0; width: 38px;">DIR1</span>
+                            <span class="element-desc" style="flex-grow:0; width: 34px;">DIR1</span>
                             <div class="hold-progress" id="prog_dir1"></div>
                             <div class="timer-popup" id="popup_dir1">3.0s</div>
                         </div>
 
                         <div class="panel-row clickable tooltip-trigger" data-key="DIR1" data-item="15" id="row_dir2" style="align-items: center; position: relative;">
                             <span class="num-tag">15</span>
-                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; flex-grow:1;">
+                            <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; flex-grow:1;">
                                 <div class="led-elem" id="LED_15"></div>
                                 <div class="push-btn" id="btn_dir2" title="Hold 3s for DS2 Cal"></div>
                             </div>
-                            <span class="element-desc" style="flex-grow:0; width: 38px;">DIR2</span>
+                            <span class="element-desc" style="flex-grow:0; width: 34px;">DIR2</span>
                             <div class="hold-progress" id="prog_dir2"></div>
                             <div class="timer-popup" id="popup_dir2">3.0s</div>
                         </div>
 
-                        <div class="panel-row tooltip-trigger" data-tag="SIM" data-msg="must not be used" style="align-items: center; cursor: pointer; border-radius: 3px; transition: background 0.15s;">
+                        <div class="panel-row tooltip-trigger" data-tag="SIM" data-msg="must not be used" style="align-items: center; cursor: pointer; border-radius: 3px;">
                             <span class="num-tag">16</span>
                             <div class="sim-socket-group">
                                 <div class="sim-pair"><div class="sim-socket"></div><div class="sim-socket"></div></div>
                                 <div class="sim-pair"><div class="sim-socket"></div><div class="sim-socket"></div></div>
                             </div>
-                            <span class="element-desc" style="flex-grow:0; width: 38px; font-size:9px;">SIM1/2</span>
+                            <span class="element-desc" style="flex-grow:0; width: 34px; font-size:8.5px;">SIM1/2</span>
                         </div>
 
                         <div class="panel-row fuse-row tooltip-trigger" data-tag="F1" data-msg="0,2 A medium time lag fuse for DS1" id="fuseF1Row" onclick="_0x4f82a('F1')">
                             <span class="num-tag">17</span>
-                            <div class="fuse-slot" style="margin-left:6px;">F1</div>
-                            <span class="element-desc fuse-desc" style="font-size:8px;">0,2A (DS1)</span>
+                            <div class="fuse-slot" style="margin-left:5px;">F1</div>
+                            <span class="element-desc fuse-desc" style="font-size:7.5px;">0,2A (DS1)</span>
                         </div>
                         <div class="panel-row fuse-row tooltip-trigger" data-tag="F2" data-msg="0,2 A medium time lag fuse for DS2" id="fuseF2Row" onclick="_0x4f82a('F2')">
                             <span class="num-tag">17</span>
-                            <div class="fuse-slot" style="margin-left:6px;">F2</div>
-                            <span class="element-desc fuse-desc" style="font-size:8px;">0,2A (DS2)</span>
+                            <div class="fuse-slot" style="margin-left:5px;">F2</div>
+                            <span class="element-desc fuse-desc" style="font-size:7.5px;">0,2A (DS2)</span>
                         </div>
                     </div>
                 </div>
@@ -850,81 +881,99 @@
             </div>
 
             <button class="btn-reset" onclick="_0x7b21e()">BROWSER REFRESH</button>
-
-            <div id="resetButtonsContainer" style="display: none; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px;">
-                <div style="background: #111820; border: 1px solid #00bcd4; border-radius: 4px; padding: 8px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 0 10px rgba(0, 188, 212, 0.15);">
-                    <div style="font-size: 10px; font-weight: bold; color: #00e5ff; text-align: center; border-bottom: 1px solid #283845; padding-bottom: 3px;">TVDS1 RESETS</div>
-                    <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="PRP1" id="row_prp1" style="margin: 0; position: relative; padding: 5px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 4px;">
-                        <div class="hold-progress" id="prog_prp1"></div>
-                        <div class="square-push-btn" id="btn_prp1" title="Hold 4s for TVDS1 Prep Reset"></div>
-                        <span class="element-desc" style="font-size: 10px; margin-left: 8px; color:#fff; font-weight:bold;">TVDS1 PREP RST</span>
-                        <div class="timer-popup" id="popup_prp1">4.0s</div>
-                    </div>
-                    <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="HRD1" id="row_hrd1" style="margin: 0; position: relative; padding: 5px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 4px;">
-                        <div class="hold-progress" id="prog_hrd1"></div>
-                        <div class="square-push-btn" id="btn_hrd1" title="Hold 4s for TVDS1 Hard Reset"></div>
-                        <span class="element-desc" style="font-size: 10px; margin-left: 8px; color:#fff; font-weight:bold;">TVDS1 HARD RST</span>
-                        <div class="timer-popup" id="popup_hrd1">4.0s</div>
-                    </div>
-                </div>
-
-                <div style="background: #111820; border: 1px solid #00bcd4; border-radius: 4px; padding: 8px; display: flex; flex-direction: column; gap: 6px; box-shadow: 0 0 10px rgba(0, 188, 212, 0.15);">
-                    <div style="font-size: 10px; font-weight: bold; color: #00e5ff; text-align: center; border-bottom: 1px solid #283845; padding-bottom: 3px;">TVDS2 RESETS</div>
-                    <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="PRP2" id="row_prp2" style="margin: 0; position: relative; padding: 5px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 4px;">
-                        <div class="hold-progress" id="prog_prp2"></div>
-                        <div class="square-push-btn" id="btn_prp2" title="Hold 4s for TVDS2 Prep Reset"></div>
-                        <span class="element-desc" style="font-size: 10px; margin-left: 8px; color:#fff; font-weight:bold;">TVDS2 PREP RST</span>
-                        <div class="timer-popup" id="popup_prp2">4.0s</div>
-                    </div>
-                    <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="HRD2" id="row_hrd2" style="margin: 0; position: relative; padding: 5px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 4px;">
-                        <div class="hold-progress" id="prog_hrd2"></div>
-                        <div class="square-push-btn" id="btn_hrd2" title="Hold 4s for TVDS2 Hard Reset"></div>
-                        <span class="element-desc" style="font-size: 10px; margin-left: 8px; color:#fff; font-weight:bold;">TVDS2 HARD RST</span>
-                        <div class="timer-popup" id="popup_hrd2">4.0s</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="counter-section" id="counterSectionBox">
-                <div class="counter-section-title">TVDS Axle & Wheel Counter Display</div>
-                <div class="counter-row-grid">
-                    <div class="counter-card">
-                        <div class="counter-card-header">TVDS1 Wheel Count</div>
-                        <div class="digit-display" id="cnt_tvds1_disp">00000</div>
-                        <div class="counter-subtext" id="cnt_tvds1_sub">NET COUNT: 0</div>
-                    </div>
-                    <div class="counter-card">
-                        <div class="counter-card-header">TVDS2 Wheel Count</div>
-                        <div class="digit-display" id="cnt_tvds2_disp">00000</div>
-                        <div class="counter-subtext" id="cnt_tvds2_sub">NET COUNT: 0</div>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
+        <!-- RIGHT COLUMN: Diagnostic Output on top, then Resets/Counter + Controls row -->
         <div class="card">
-            <div class="card-header-row">
-                <h2>Manual Description & Diagnostic Output</h2>
-                
-                <div class="controls-panel">
-                    <div class="toggles-row-top">
-                        <div class="widget-box">
+            <h2>Manual Description & Diagnostic Output</h2>
+
+            <!-- 1) Diagnostic box -->
+            <div class="info-box" id="infoOutput">
+                <h3>System Ready</h3>
+                <span class="badge badge-info">SELECT ITEM</span>
+                <p>Front panel ke kisi bhi LED row, fuse, Ethernet port, ya button par hover/click karke test karein.</p>
+            </div>
+
+            <!-- 2) Bottom row -->
+            <div class="bottom-section-row">
+
+                <!-- LEFT: TVDS Resets + Counter -->
+                <div class="bottom-left">
+
+                    <!-- TVDS RESETS -->
+                    <div id="resetButtonsContainer" style="display: none; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 8px;">
+                        <div style="background: #111820; border: 1px solid #00bcd4; border-radius: 4px; padding: 6px; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 0 10px rgba(0, 188, 212, 0.15);">
+                            <div style="font-size: 9px; font-weight: bold; color: #00e5ff; text-align: center; border-bottom: 1px solid #283845; padding-bottom: 2px;">TVDS1 RESETS</div>
+                            <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="PRP1" id="row_prp1" style="margin: 0; position: relative; padding: 4px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 3px;">
+                                <div class="hold-progress" id="prog_prp1"></div>
+                                <div class="square-push-btn" id="btn_prp1" title="Hold 4s for TVDS1 Prep Reset"></div>
+                                <span class="element-desc" style="font-size: 9px; margin-left: 6px; color:#fff; font-weight:bold;">TVDS1 PREP RST</span>
+                                <div class="timer-popup" id="popup_prp1">4.0s</div>
+                            </div>
+                            <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="HRD1" id="row_hrd1" style="margin: 0; position: relative; padding: 4px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 3px;">
+                                <div class="hold-progress" id="prog_hrd1"></div>
+                                <div class="square-push-btn" id="btn_hrd1" title="Hold 4s for TVDS1 Hard Reset"></div>
+                                <span class="element-desc" style="font-size: 9px; margin-left: 6px; color:#fff; font-weight:bold;">TVDS1 HARD RST</span>
+                                <div class="timer-popup" id="popup_hrd1">4.0s</div>
+                            </div>
+                        </div>
+
+                        <div style="background: #111820; border: 1px solid #00bcd4; border-radius: 4px; padding: 6px; display: flex; flex-direction: column; gap: 5px; box-shadow: 0 0 10px rgba(0, 188, 212, 0.15);">
+                            <div style="font-size: 9px; font-weight: bold; color: #00e5ff; text-align: center; border-bottom: 1px solid #283845; padding-bottom: 2px;">TVDS2 RESETS</div>
+                            <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="PRP2" id="row_prp2" style="margin: 0; position: relative; padding: 4px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 3px;">
+                                <div class="hold-progress" id="prog_prp2"></div>
+                                <div class="square-push-btn" id="btn_prp2" title="Hold 4s for TVDS2 Prep Reset"></div>
+                                <span class="element-desc" style="font-size: 9px; margin-left: 6px; color:#fff; font-weight:bold;">TVDS2 PREP RST</span>
+                                <div class="timer-popup" id="popup_prp2">4.0s</div>
+                            </div>
+                            <div class="panel-row clickable-btn-row full-clickable-btn-row tooltip-trigger" data-action="HRD2" id="row_hrd2" style="margin: 0; position: relative; padding: 4px; background: rgba(0,188,212,0.08); border: 1px solid rgba(0,229,255,0.4); border-radius: 3px;">
+                                <div class="hold-progress" id="prog_hrd2"></div>
+                                <div class="square-push-btn" id="btn_hrd2" title="Hold 4s for TVDS2 Hard Reset"></div>
+                                <span class="element-desc" style="font-size: 9px; margin-left: 6px; color:#fff; font-weight:bold;">TVDS2 HARD RST</span>
+                                <div class="timer-popup" id="popup_hrd2">4.0s</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COUNTER SECTION -->
+                    <div class="counter-section" id="counterSectionBox">
+                        <div class="counter-section-title">TVDS Axle & Wheel Counter Display</div>
+                        <div class="counter-row-grid">
+                            <div class="counter-card">
+                                <div class="counter-card-header">TVDS1 Wheel Count</div>
+                                <div class="digit-display" id="cnt_tvds1_disp">00000</div>
+                                <div class="counter-subtext" id="cnt_tvds1_sub">NET COUNT: 0</div>
+                            </div>
+                            <div class="counter-card">
+                                <div class="counter-card-header">TVDS2 Wheel Count</div>
+                                <div class="digit-display" id="cnt_tvds2_disp">00000</div>
+                                <div class="counter-subtext" id="cnt_tvds2_sub">NET COUNT: 0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT: Controls (GPS Clock, Tooltips, Timer, Train Movement) -->
+                <div class="bottom-right">
+                    <div class="controls-grid-layout">
+                        <!-- Box 1: GPS Clock -->
+                        <div class="control-box-item">
                             <span class="widget-title">GPS Clock (IST)</span>
                             <div class="widget-display" id="gpsClockDisplay">00:00:00</div>
                         </div>
 
-                        <div class="tooltip-toggle-wrapper">
+                        <!-- Box 2: Tooltips Toggle -->
+                        <div class="control-toggle-item">
                             <span>Tooltips</span>
                             <label class="switch">
                                 <input type="checkbox" id="tooltipToggle">
                                 <span class="slider"></span>
                             </label>
                         </div>
-                    </div>
 
-                    <div class="toggles-row-bottom">
-                        <div class="widget-box">
+                        <!-- Box 3: Timer -->
+                        <div class="control-box-item">
                             <span class="widget-title">Timer</span>
                             <div class="widget-display-row">
                                 <span class="widget-display" id="trainingTimerDisplay">00:00:00</span>
@@ -935,7 +984,8 @@
                             </div>
                         </div>
 
-                        <div class="tooltip-toggle-wrapper">
+                        <!-- Box 4: Train Movement Toggle -->
+                        <div class="control-toggle-item">
                             <span>Train Movement</span>
                             <label class="switch">
                                 <input type="checkbox" id="trainMoveToggle" onchange="_0x112b9(this)">
@@ -946,29 +996,21 @@
                 </div>
 
             </div>
-            
-            <div class="info-box" id="infoOutput">
-                <h3>System Ready</h3>
-                <span class="badge badge-info">SELECT ITEM</span>
-                <p>Front panel ke kisi bhi LED row, fuse, Ethernet port, ya button par hover/click karke test karein.</p>
-            </div>
-
         </div>
 
     </div>
 
     <footer class="app-footer">
-        <div>&copy; 2026 | Designed & Developed by Indranil Jana</div>
-        <div style="margin-top: 2px;">Sr. Engineer – Siemens GBS</div>
+        <div>
+            <span class="shimmer-full-text">&copy; 2026 | Designed &amp; Developed by Indranil Jana &bull; Sr. Engineer &ndash; Siemens GBS</span>
+        </div>
     </footer>
 </div>
 
 <script>
     // --- ANTI-THEFT / DOMAIN LOCK & FAKE CODE INJECTION ---
     (function() {
-        // Aap apna GitHub Pages URL yahan dal sakte hain taaki sirf wahin chale, 
-        // baaki dusri website pe kholne par fake/error code show ho jayega.
-        const allowedDomain = ""; // Agar empty chhodenge toh khud ke domain pe chalega, baaki kisi iframe/domain pe fake code dikhega.
+        const allowedDomain = ""; 
         if (window.self !== window.top || (allowedDomain && window.location.hostname !== allowedDomain && window.location.hostname !== "localhost")) {
             document.open();
             document.write('<!DOCTYPE html><html><head><title>403 Forbidden</title></head><body style="background:#111;color:#ff3333;font-family:monospace;padding:50px;text-align:center;"><h1>Access Denied</h1><p>Unauthorized code inspection or embedding detected.</p></body></html>');
@@ -988,17 +1030,6 @@
             return false;
         }
     });
-
-    // Anti-Debugging Trap
-    setInterval(function() {
-        const _0x1a = function() {
-            try {
-                let _0x2b = function() {};
-                _0x2b.constructor("debugger")();
-            } catch (_0x3c) {}
-        };
-        _0x1a();
-    }, 1000);
 
     // --- OUTSIDE CLICK TO HIDE TOOLTIP ---
     $(document).on('click', function(e) {
@@ -1601,7 +1632,7 @@
         }
         else if (_actionKey === 'PRP2') {
             if (_0x03c[9] === 'orange' || _0x0cf === 'incount') {
-                _0x99281('TVDS2 Prep Reset REJECTED!', 'badge-fault', '• RR2 LED is ORANGE (Reset Restriction Active).\n• Reset cannot be accepted.', '• Press and hold "RST-RR2" button first to clear RR2 indication, then try resetting.');
+                _0x99281('TVDS2 Prep Reset REJECTED!', 'badge-fault', '• RR2 LED is ORANGE (Reset Restriction Active).\n• Reset cannot be accepted.', '• Press and hold "RST-RR2" button first to clear RR1 indication, then try resetting.');
                 return;
             }
             _0x08b = 0;
@@ -1614,7 +1645,7 @@
         }
         else if (_actionKey === 'HRD2') {
             if (_0x03c[9] === 'orange' || _0x0cf === 'incount') {
-                _0x99281('TVDS2 Hard Reset REJECTED!', 'badge-fault', '• RR2 LED is ORANGE (Reset Restriction Active).\n• Reset cannot be accepted.', '• Press and hold "RST-RR2" button first to clear RR2 indication, then try resetting.');
+                _0x99281('TVDS2 Hard Reset REJECTED!', 'badge-fault', '• RR2 LED is ORANGE (Reset Restriction Active).\n• Reset cannot be accepted.', '• Press and hold "RST-RR2" button first to clear RR1 indication, then try resetting.');
                 return;
             }
             _0x08b = 0;
@@ -1834,7 +1865,7 @@
             $('#trainMoveToggle').prop('checked', false);
             $('#counterSectionBox').hide();
             $('#resetButtonsContainer').hide();
-            $('#tooltipToggle').prop('checked', false); // Default OFF on reload/load
+            $('#tooltipToggle').prop('checked', false);
 
             $('#rj45Box').removeClass('green-state black-state');
             $('#rj45Label').removeClass('green-text red-text').text('ETH PORT');
