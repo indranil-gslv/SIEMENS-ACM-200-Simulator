@@ -1384,21 +1384,16 @@
             return;
         }
 
+        // --- TVDS1 Logic ---
         const _$c1 = $('#cnt_tvds1_disp');
         $('#cnt_tvds1_sub').text(`NET COUNT: ${_0x07a}`);
         _$c1.text(_fmt(_0x07a)).removeClass('occupied error orange');
 
-        if (_0x07a !== 0 && _0x0d1) {
-            _0x0d1 = false;
-        }
-
         if (_0x07a < 0) {
-            _0x09c = true;
-        } else if (_0x07a === 0 && !_0x0d1) {
-            _0x09c = false;
+            _0x09c = true; // Latch Red error state (won't clear without reset)
         }
 
-        if (_0x09c || _0x07a < 0) {
+        if (_0x09c) {
             _$c1.addClass('error');
             _0x9911a(2, 'steady-red');
         } else if (_0x0d1 && _0x07a === 0) {
@@ -1417,21 +1412,16 @@
             _0x9911a(8, 'off');
         }
 
+        // --- TVDS2 Logic ---
         const _$c2 = $('#cnt_tvds2_disp');
         $('#cnt_tvds2_sub').text(`NET COUNT: ${_0x08b}`);
         _$c2.text(_fmt(_0x08b)).removeClass('occupied error orange');
 
-        if (_0x08b !== 0 && _0x0e2) {
-            _0x0e2 = false;
-        }
-
         if (_0x08b < 0) {
-            _0x0ad = true;
-        } else if (_0x08b === 0 && !_0x0e2) {
-            _0x0ad = false;
+            _0x0ad = true; // Latch Red error state (won't clear without reset)
         }
 
-        if (_0x0ad || _0x08b < 0) {
+        if (_0x0ad) {
             _$c2.addClass('error');
             _0x9911a(3, 'steady-red');
         } else if (_0x0e2 && _0x08b === 0) {
@@ -1609,7 +1599,7 @@
                 return;
             }
             _0x07a = 0;
-            _0x09c = false;
+            _0x09c = false; // Clear red fault state on Prep Reset
             _0x0d1 = true;
             _0x0be = 'outcount';
             _0x9911a(8, 'off');
@@ -1622,7 +1612,7 @@
                 return;
             }
             _0x07a = 0;
-            _0x09c = false;
+            _0x09c = false; // Clear red fault state on Hard Reset
             _0x0d1 = false;
             _0x0be = 'outcount';
             _0x9911a(8, 'off');
@@ -1636,7 +1626,7 @@
                 return;
             }
             _0x08b = 0;
-            _0x0ad = false;
+            _0x0ad = false; // Clear red fault state on Prep Reset
             _0x0e2 = true;
             _0x0cf = 'outcount';
             _0x9911a(9, 'off');
@@ -1649,7 +1639,7 @@
                 return;
             }
             _0x08b = 0;
-            _0x0ad = false;
+            _0x0ad = false; // Clear red fault state on Hard Reset
             _0x0e2 = false;
             _0x0cf = 'outcount';
             _0x9911a(9, 'off');
